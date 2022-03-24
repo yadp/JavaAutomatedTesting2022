@@ -1,8 +1,6 @@
-package com.company;
+package com.company.rectangle;
 
-import com.company.rectangle.Rectangle;
-
-public class Main {
+public class RecMain {
 
 
 
@@ -10,7 +8,6 @@ public class Main {
 	// write your code here
         Rectangle rectangle = new Rectangle(4,5);
         Rectangle rectangle2 = new Rectangle(4,5);
-
 
         rectangle.setA(-1);
         System.out.println(rectangle.area());
