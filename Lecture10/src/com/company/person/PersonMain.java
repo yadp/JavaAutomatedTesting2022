@@ -5,10 +5,35 @@ import java.util.Arrays;
 public class PersonMain {
 
     public static void main(String[] args) {
+        int age= 20;
+        String[] words = new String[]{"Java","Math","Math","Math"};
+
+        System.out.println(count("Java8",words));
+
         Person person= new Student(1.8,
                 "Bob",
                 20,
                 new String[]{"Java","Math"});
+
+        //person.getClasses();
+        if(person instanceof Person){
+            System.out.println("This is of type person");
+        }
+
+        if(person instanceof Object){
+            System.out.println("This is object");
+        } else {
+            System.out.println("This is not an object");
+        }
+
+        if(person instanceof Student){
+            Student convertedStudent = (Student) person;
+            System.out.println(convertedStudent.getClasses());
+        }
+
+        int a=5;
+        double b = a;
+        int c = (int) b;
 
         Person[] personArray= new Person[3];
         personArray[0] = new Student(1.8,
@@ -27,21 +52,18 @@ public class PersonMain {
         double ageSum=0;
         for (int i = 0; i < personArray.length; i++) {
 
-            ageSum+=personArray[i].getAge();
+            ageSum = ageSum + personArray[i].getAge();
         }
 
-
         System.out.println(ageSum/personArray.length);
+
         System.out.println(mostUsedSubject(personArray));
-
-
     }
 
     private static String mostUsedSubject(Person[] person){
         String[] allSubjects = new String[10];
         for (int i = 0; i < person.length; i++) {
             if(person[i] instanceof Student){
-                System.out.println(person[i]);
                 String[] classes = ((Student)person[i]).getClasses();
                 addClasses(allSubjects, classes);
             }
@@ -53,23 +75,23 @@ public class PersonMain {
     }
 
     private static String mostStringsInArray(String[] allSubjects) {
-        int number=0;
-        String word="";
+        int maxNumber=0;
+        String subject="";
         for (int i = 0; i < allSubjects.length; i++) {
-            int newMax= count(allSubjects[i],allSubjects);
+            int newMax = count(allSubjects[i],allSubjects);
 
-            if(newMax>number && allSubjects[i]!=null){
-                number=newMax;
-                word=allSubjects[i];
+            if(newMax > maxNumber && allSubjects[i]!=null){
+                maxNumber=newMax;
+                subject=allSubjects[i];
             }
         }
-        return word;
+        return subject;
     }
 
     private static int count(String subject, String[] allSubjects) {
         int count=0;
         for (int i = 0; i < allSubjects.length; i++) {
-            if (allSubjects[i]==subject){
+            if (allSubjects[i]!=null && allSubjects[i].equals(subject)){
                 count++;
             }
 
@@ -77,14 +99,13 @@ public class PersonMain {
         return count;
     }
 
-
-    private static void addClasses(String[] allSubjects, String[] classes) {
-        System.out.println(Arrays.toString(allSubjects));
-        System.out.println(Arrays.toString(classes));
-        for (int i = 0; i < classes.length; i++) {
-            for (int j = 0; j < allSubjects.length; j++) {
-                if(allSubjects[j]==null){
-                    allSubjects[j]=classes[i];
+    private static void addClasses(String[] allSubjects, String[] subjectToAdd) {
+        //System.out.println(Arrays.toString(allSubjects));
+        //System.out.println(Arrays.toString(subjectToAdd));
+        for (int i = 0; i < subjectToAdd.length; i++) {
+            for (int k = 0; k < allSubjects.length; k++) {
+                if(allSubjects[k]==null){
+                    allSubjects[k]=subjectToAdd[i];
                     break;
                 }
             }
